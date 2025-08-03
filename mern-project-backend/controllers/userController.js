@@ -86,3 +86,14 @@ export function isAdmin(req){
 
     return true; // if user is an admin return the true value(continue the process)
 }
+
+export function isCustomer(req){
+    if(req.user == null){
+        return false;
+    }
+    if(req.user.role != "user"){
+        return false
+    }
+
+    return true;
+}
