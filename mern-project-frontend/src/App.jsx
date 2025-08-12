@@ -4,9 +4,21 @@ function App() {
 
   return (
     <>
-      <h1>Welcome to Pixel Store</h1>
-      <ProductCard name="Google Pixel 9 Pro XL" price="$999" image="https://lh3.googleusercontent.com/No79vwxK41bkOz4mwK1KXYr5vrt-M9ONNNpcBx9fbR9MMUGF1aHAd4hXC_PxJPBcL3jiGITI7roQ-eWJsFknfW8evZh-xXvvECA=s3000-w3000-e365-rw-v0-nu" />
-      <ProductCard name="Pixel Buds Pro 2" price="$189" image="https://lh3.googleusercontent.com/1Ozxqio-Q5rE-rCGoAFZpmIrhSJFA9Fydv9jhfHKmqCbpxHEIOT7yEaaHWM8bS97KYa6pa-hG-7zHOGUGNB_9JEbSIapl7PY2gwE=s3000-w3000-e365-rw-v0-nu" />
+      <div className="h-[700px] w-[700px] border-[5px] flex justify-center items-center">
+
+        <div className=" w-[400px] h-[200px] bg-yellow-400 flex relative justify-center items-center">  
+          <button className="text-white bg-red-600 p-[5px] absolute right-[0px] top-[0px] ">X</button>
+          <h1>An Unknown Error</h1>
+          <button className="bg-green-500 text-white p-[5px] font-bold rounded fixed right-[10px] bottom-[10px]">Chat with Whatsapp</button>
+        </div> 
+
+        <div className="w-[200px] h-[200px] bg-red-400 m-[10px]">
+          <div className="w-[50px] h-[50px] bg-yellow-700 m-[10px]"></div>
+          <div className="w-[50px] h-[50px] bg-purple-700 m-[10px]"></div>
+        </div>
+
+      </div>
+       
     </>
   )
 }

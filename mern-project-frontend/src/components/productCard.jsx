@@ -12,7 +12,7 @@ export default function ProductCard(props) {  // we need to capital the first le
             alt={props.name} // when image is not working it will show the name of the product
         />
         <p>{props.price} </p>
-        <button>Add to cart</button>
+        <button>Add to cart</button> 
     </div>
   );
 } 
