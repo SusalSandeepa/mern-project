@@ -1,4 +1,3 @@
-import "./productCard.css"
 export default function ProductCard(props) {  // we need to capital the first letter of the component name becauseit is used as a JSX tag
 
     // props is an object that contains all the properties passed to the component from app.jsx(inside jsx tags <ProductCard />)
