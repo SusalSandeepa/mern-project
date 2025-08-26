@@ -56,12 +56,19 @@ export function loginUser(req,res){
                             isEmailVerified: user.isEmailVerified
                         }, // encrypt user data and save them as a token to store sensitive data like login details
 
-                        "jwt-secret" // encrpt key
+                        process.env.JWT_SECRET // encrpt key
                     )
                     res.json(
                         {
                             message: "Login Successful",
-                            token: token
+                            token: token,
+                            user: {
+                                email: user.email,
+                                firstName: user.firstName,
+                                lastName: user.lastName,
+                                role: user.role,
+                                isEmailVerified: user.isEmailVerified
+                            }
                         }
                     )
                 }else{

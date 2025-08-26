@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRouter.js";
 import jwt from "jsonwebtoken";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables from .env file
 
 const app = express()
 
-/* 
-function success(){
- console.log("server is Started")
-} 
-*/
+app.use(cors())
 
 app.use(express.json()) //make unreadable http request to readable form and act as a middleware
 
@@ -21,7 +21,7 @@ app.use(  // middleware for authentication
         if(token != null){
             token = token.replace("Bearer ","") // remove "Bearer" part from the token
             console.log(token) 
-            jwt.verify(token, "jwt-secret", //verify token and encrypt key to decrypt the encrypted data
+            jwt.verify(token, process.env.JWT_SECRET, //verify token and encrypt key to decrypt the encrypted data
                 (err, decoded)=>{
                     if(decoded == null){
                         res.json({
@@ -38,7 +38,7 @@ app.use(  // middleware for authentication
     }
 )
 
-const connectionString = "mongodb+srv://admin:123@cluster0.vhzzm3n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const connectionString = process.env.MONGO_URI;
 
 mongoose.connect(connectionString).then(
     ()=>{
@@ -50,8 +50,8 @@ mongoose.connect(connectionString).then(
     }
 )
 
-app.use("/users",userRouter)
-app.use("/products",productRouter)
+app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
 
 app.listen(5000, 
     ()=>{
