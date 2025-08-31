@@ -1,37 +1,37 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import axios from "axios"; // axios is used to make HTTP requests to the backend server
+import { useEffect, useState } from "react"; 
+// useState is used when your data can change and you want the UI to update when it changes
+// useEffect is used to perform side effects such as fetching data from backend
+
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminProductPage() {
-	// useState is used when your data can change and you want the UI to update when it changes
-	const [products, setProducts] = useState([]); // products is an array of product objects, setProducts updates it
+	// products is an array of product objects, setProducts updates it
+	const [products, setProducts] = useState([]);
+	const navigate = useNavigate();
 
-	// We use the useEffect hook with axios because if we call axios directly in a component,
-	// it will run on every re-render. By using useEffect with an empty dependency array [],
-	// the axios call runs only once when the component loads.
 	useEffect(() => {
+		// We use the useEffect hook with axios because if we call axios directly in a component,
+		// it will run on every re-render. By using useEffect with an empty dependency array [],
+		// the axios call runs only once when the component loads
 		axios
 			.get(import.meta.env.VITE_API_URL + "/api/products")
 			.then((response) => {
 				console.log(response.data);
-				setProducts(response.data); // update products array with backend data
+				// update products array with backend data
+				setProducts(response.data);
 			});
 	}, []); // empty array → runs only once when component mounts
 
 	return (
 		<div className="w-full min-h-full">
-			{/* Floating add-product button */}
-			<Link
-				to="/admin/add-product"
-				className="fixed right-[50px] bottom-[50px] text-5xl hover:text-accent"
-			>
-				<CiCirclePlus />
-			</Link>
-
-			{/* Page container */}
+			<Link to="/admin/add-product" className="fixed right-[50px] bottom-[50px] text-5xl hover:text-accent">
+                <CiCirclePlus  />
+            </Link>
+            {/* Page container */}
 			<div className="mx-auto max-w-7xl p-6">
 				{/* Card */}
 				<div className="rounded-2xl border border-secondary/10 bg-primary shadow-sm">
@@ -64,6 +64,9 @@ export default function AdminProductPage() {
 										Labelled Price
 									</th>
 									<th className="sticky top-0 z-10 px-4 py-3 text-xs font-semibold uppercase tracking-wide">
+										Stock
+									</th>
+									<th className="sticky top-0 z-10 px-4 py-3 text-xs font-semibold uppercase tracking-wide">
 										Category
 									</th>
 									<th className="sticky top-0 z-10 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-center">
@@ -74,9 +77,10 @@ export default function AdminProductPage() {
 
 							<tbody className="divide-y divide-secondary/10">
 								{products.map((item) => {
+									// key is important for React’s reconciliation process
 									return (
 										<tr
-											key={item.productID} // key is important for React’s reconciliation process
+											key={item.productID}
 											className="odd:bg-white even:bg-primary hover:bg-accent/5 transition-colors"
 										>
 											<td className="px-4 py-3">
@@ -102,13 +106,17 @@ export default function AdminProductPage() {
 													LKR {item.labelledPrice}
 												</span>
 											</td>
+											<td className="px-4 py-3 text-secondary/70">
+												<span className="text-sm">
+													{item.stock}
+												</span>
+											</td>
 											<td className="px-4 py-3">
 												<span className="rounded-full bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
 													{item.category}
 												</span>
 											</td>
 											<td className="px-4 py-3">
-												{/* Action buttons */}
 												<div className="flex items-center justify-center gap-3">
 													<FaRegTrashCan
 														className="cursor-pointer rounded-lg p-2 text-secondary/70 ring-1 ring-secondary/10 hover:bg-accent/10 hover:text-accent transition"
@@ -121,19 +129,23 @@ export default function AdminProductPage() {
 														size={36}
 														title="Edit"
 														aria-label="Edit product"
+														onClick={()=>{
+															// navigate to update page and pass product data via state to identify which product need to be updated
+															navigate("/admin/update-product" , {
+																state : item  
+															})
+														}}
 													/>
 												</div>
 											</td>
 										</tr>
 									);
 								})}
-
-								{/* If no products are available */}
 								{products.length === 0 && (
 									<tr>
 										<td
 											className="px-4 py-12 text-center text-secondary/60"
-											colSpan={7}
+											colSpan={8} // updated colSpan to match the number of table headers
 										>
 											No products to display.
 										</td>
@@ -147,5 +159,3 @@ export default function AdminProductPage() {
 		</div>
 	);
 }
-
-// axios is used to make HTTP requests to the backend server
