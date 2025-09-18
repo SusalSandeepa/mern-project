@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function ProductCard(props) {  // we need to capital the first letter of the component name becauseit is used as a JSX tag
 
     // props is an object that contains all the properties passed to the component from app.jsx(inside jsx tags <ProductCard />)
@@ -18,9 +19,9 @@ export default function ProductCard(props) {  // we need to capital the first le
         }
         <p className="text-sm text-secondary/70">{product.productID}</p>
         <p className="text-sm text-secondary/70">{product.category}</p>
-        <button className="w-full h-[30px] mt-[5px] border border-accent text-accent hover:bg-accent hover:text-white hover:font-semibold">
+        <Link to={"/overview/"+product.productID} className="w-full h-[30px] mt-[5px] text-center border border-accent text-accent hover:bg-accent hover:text-white hover:font-semibold">
           View Product
-        </button>
+        </Link>
         
    </div>
   );

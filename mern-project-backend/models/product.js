@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        altnames : {
+        altNames : {
             type: [String], // we take it as an array because there aren't only one name, names >= 1
             default: [],    // if some one didn't give alt names, it wiil be display as an empty array
             required: true
