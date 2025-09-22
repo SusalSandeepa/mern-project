@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import { BsCart3 } from "react-icons/bs";
 
 export default function Header(){
     return(
@@ -11,6 +12,7 @@ export default function Header(){
                     <Link to = "/about">About</Link>
                     <Link to = "/contact">Contact</Link>
                 </div>
+                <Link to = "/cart" className="h-full flex justify-end items-center text-2xl gap-2 absolute right-0"><BsCart3/></Link>
             </div>
         </header>
     ) 
