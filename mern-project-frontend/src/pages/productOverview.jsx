@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { Loader } from "../components/loader.jsx";
 import ImageSlider from "../components/imageSlider.jsx";
 import { addToCart, loadCart } from "../utils/cart.js";
-
 export default function ProductOverview() {
 
     const params = useParams(); // useParams is a hook that allows us to access the parameters of the current route. Here we are accessing the id parameter from the route /overview/:id
@@ -17,7 +16,7 @@ export default function ProductOverview() {
             axios.get(import.meta.env.VITE_API_URL+"/api/products/"+params.id).then(
                 (res)=>{
                     setProduct(res.data)
-                    setStatus("successful")
+                    setStatus("success")
                 }
             ).catch(
                 ()=>{
@@ -29,21 +28,21 @@ export default function ProductOverview() {
     )
 
     return(
-        <div className="w-full h-[calc(100vh-100px)] text-secondary">
+        <div className="w-full minh-[calc(100vh-100px)] text-secondary bg-primary ">
 
             {
                 status == "loading" && <Loader/>
             }
 
             {
-                status == "successful" && (
-                    <div className="w-full h-full flex">
-
-                        <div className="w-[50%] h-full flex justify-center items-center">
+                status == "success" && (
+                    <div className="w-full flex flex-col lg:flex-row p-10">
+                        <h1 className="text-2xl font-bold text-center lg:hidden">{product.name}</h1>
+                        <div className="w-full h-full flex justify-center items-center lg:w-[50%]">
                             <ImageSlider images={product.images}/>
                         </div>
 
-                        <div className="w-[50%] h-full flex flex-col items-center p-10 gap-4">
+                        <div className="w-full h-full flex flex-col items-center bg-primary p-10 gap-4 lg:w-[50%]">
                             <span className="">{product.productID}</span>
                             <h1 className="text-2xl font-bold text-center">{product.name}
                                 {

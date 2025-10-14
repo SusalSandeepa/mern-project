@@ -1,28 +1,11 @@
-import { useState } from "react";
-import mediaUpload from "../utils/mediaUpload";
-
 export default function TestPage() {
 
-    const [file, setFile] = useState(null)
-
-    async function uploadImage() {
-
-        const link = await mediaUpload(file)
-        console.log(link)
-        
-    }
 
     return (
         <div className="w-full h-full flex justify-center items-center">
-            <input type = "file" onChange = {
-                (e)=>{
-                    setFile(e.target.files[0])
-                }
-            }/>
-            <button className="bg-black text-accent p-2 rounded" onClick={uploadImage}>
-                Upload
-            </button>
+            <div className="w-[600px] h-[600px] bg-accent md:bg-amber-300 lg:bg-pink-300"></div> 
         </div>
     );
-    //supabase.storage.from("images") images is the name of the bucket that I created in supabase.
+    //md means for medium devices and larger (like tablets and desktops)
+    //md:bg-amber-300 means the background color will be amber-300 for medium devices and larger and bg-accent for smaller devices (like mobile phones)
 }
