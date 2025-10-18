@@ -2,8 +2,11 @@ import { useState } from "react";
 import { BsCart3 } from "react-icons/bs";
 import { MdMenu } from "react-icons/md";
 import { Link } from "react-router-dom";
+import UserData from "./userData.jsx";
+import UserDataMobile from "./userDataMobile.jsx";
 
 export default function Header() {
+
 	const [isSideBarOpen, setIsSidebarOpen] = useState(false);
 
 	return (
@@ -11,18 +14,18 @@ export default function Header() {
 			<div className="w-full h-full flex relative ">
 				<img
 					src="/logo.png"
-					className="hidden lg:flex h-full absolute w-[170px] left-0  object-cover"
+					className="hidden lg:flex h-full absolute w-[180px] left-0  object-cover"
 				/>
 				<div className="lg:hidden w-full relative  flex justify-center items-center">
 					<MdMenu
 						className="absolute left-0 text-3xl"
 						onClick={() => setIsSidebarOpen(true)}
 					/>
-					<img src="/logo.png" className="  h-full  w-[170px]   object-cover" />
+					<img src="/logo.png" className="  h-full  w-[180px]   object-cover" />
 				</div>
 				{isSideBarOpen && (
 					<div className="fixed top-0 left-0 w-full h-screen bg-[#00000080] text-secondary z-100">
-						<div className="w-[300px] bg-primary h-full flex flex-col">
+						<div className="w-[300px] bg-primary h-full flex flex-col relative">
 							<div className="lg:hidden h-[100px] w-full bg-accent relative  flex justify-center items-center">
 								<MdMenu
 									className="absolute left-2 text-white text-3xl"
@@ -30,7 +33,7 @@ export default function Header() {
 								/>
 								<img
 									src="/logo.png"
-									className="  h-full  w-[170px]   object-cover"
+									className="  h-full  w-[180px]   object-cover"
 								/>
 
 							</div>
@@ -49,6 +52,9 @@ export default function Header() {
 							<a href="/cart" className="p-4 border-b border-secondary/10">
 								Cart
 							</a>
+							<div className="flex lg:hidden w-[300px] absolute bottom-[20px] left-0 justify-center items-center gap-4">
+								<UserDataMobile/>
+							</div>
 						</div>
 					</div>
 				)}
@@ -58,6 +64,9 @@ export default function Header() {
 					<Link to="/products">Products</Link>
 					<Link to="/about">About</Link>
 					<Link to="/contact">Contact</Link>
+				</div>
+				<div className="h-full hidden lg:flex w-[200px] absolute right-[100px] top-0 justify-end items-center gap-4">
+					<UserData/>
 				</div>
 				<Link
 					to="/cart"

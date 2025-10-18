@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
 
         image : {
             type : String,
-            default : "https://www.gravatar.com/avatar/"
+            default : "/user.png"
         }
     }
 )
