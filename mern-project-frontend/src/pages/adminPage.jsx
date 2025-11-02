@@ -7,6 +7,7 @@ import AdminProductPage from "./admin/adminProductPage";
 import AddProductPage from "./admin/adminAddNewProduct";
 import UpdateProductPage from "./admin/adminUpdateProduct";
 import AdminOrdersPage from "./admin/adminOrdersPage";
+import AdminUsersPage from "./admin/usersPage";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -95,6 +96,7 @@ export default function AdminPage() {
 						<Route path="/orders" element={<AdminOrdersPage/>} />
 						<Route path="/add-product" element={<AddProductPage />} />
 						<Route path="/update-product" element={<UpdateProductPage/>}/>
+						<Route path="/users" element={<AdminUsersPage/>} />
 					</Routes>:<Loader/>}
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Loader } from "./loader";
 
 export default function UserDataMobile(){
     const [user, setUser] = useState(null);

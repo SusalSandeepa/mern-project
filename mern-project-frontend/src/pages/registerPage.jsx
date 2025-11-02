@@ -4,28 +4,31 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
-	const [email, setEmail] = useState(""); // state variable to store latest email and setEmail is function to update the email value
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-
+    const[firstName, setFirstName] = useState("");
+    const[lastName, setLastName] = useState("");
+    const[confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate()
 
 	async function register() {
+        if(password !== confirmPassword){
+            toast.error("Passwords do not match");
+            return;
+        }
 		try {
 			await axios.post(
 				import.meta.env.VITE_API_URL + "/api/users/",
 				{ 
-                    email : email, 
-                    firstName : firstName, 
-                    lastName : lastName,
-                    password : password
+                    email : email,
+                    password : password, 
+                    firstName : firstName,
+                    lastName : lastName
                 }
 			);
-
-            toast.success("Registration successful! Please log in.");
-            navigate("/login")
+            
+            toast.success("Registration successful! Please login.");
+            navigate("/login");
 
 		} catch (e) {
 			console.error("Login failed:", e);
@@ -44,8 +47,7 @@ export default function RegisterPage() {
 
 			{/* Layout */}
 			<div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 w-full">
-                {/* Left side form */}
-				<div className="flex items-center justify-center p-6 sm:p-10">
+                <div className="flex items-center justify-center p-6 sm:p-10">
 					<div className="w-full max-w-md">
 						<div className="rounded-3xl backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl p-8 sm:p-10">
 							<div className="mb-8 flex flex-col items-center text-center">
@@ -54,6 +56,7 @@ export default function RegisterPage() {
 									alt="CBC Logo"
 									className="h-12 w-auto mb-4"
 								/>
+						
 							</div>
 
 							<div className="space-y-5">
@@ -73,7 +76,6 @@ export default function RegisterPage() {
 										className="w-full h-11 rounded-xl bg-white/90 text-secondary placeholder-secondary/50 px-4 outline-none ring-2 ring-transparent focus:ring-accent/60 transition"
 									/>
 								</div>
-
                                 <div className="space-y-2">
 									<label
 										htmlFor="firstName"
@@ -90,7 +92,6 @@ export default function RegisterPage() {
 										className="w-full h-11 rounded-xl bg-white/90 text-secondary placeholder-secondary/50 px-4 outline-none ring-2 ring-transparent focus:ring-accent/60 transition"
 									/>
 								</div>
-
                                 <div className="space-y-2">
 									<label
 										htmlFor="lastName"
@@ -102,7 +103,7 @@ export default function RegisterPage() {
 										id="lastName"
 										type="text"
 										placeholder="e.g., Doe"
-										autoComplete="family-name"
+										autoComplete="family_name"
 										onChange={(e) => setLastName(e.target.value)}
 										className="w-full h-11 rounded-xl bg-white/90 text-secondary placeholder-secondary/50 px-4 outline-none ring-2 ring-transparent focus:ring-accent/60 transition"
 									/>
@@ -124,23 +125,22 @@ export default function RegisterPage() {
 										className="w-full h-11 rounded-xl bg-white/90 text-secondary placeholder-secondary/50 px-4 outline-none ring-2 ring-transparent focus:ring-accent/60 transition"
 									/>
 								</div>
-
-                                <div className="space-y-2">
-                                    <label
-                                        htmlFor="confirmPassword"
-                                        className="text-sm font-medium text-primary/90"
-                                    >
-                                        Confirm Password
-                                    </label>
-                                    <input
-                                        id="confirmPassword"
-                                        type="password"
-                                        placeholder="Confirm your password"
-                                        autoComplete="current-password"
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="w-full h-11 rounded-xl bg-white/90 text-secondary placeholder-secondary/50 px-4 outline-none ring-2 ring-transparent focus:ring-accent/60 transition"
-                                    />
-                                </div>
+                                	<div className="space-y-2">
+									<label
+										htmlFor="confirmPassword"
+										className="text-sm font-medium text-primary/90"
+									>
+										Confirm Password
+									</label>
+									<input
+										id="confirmPassword"										
+										type="password"
+										placeholder="Enter your password"
+										autoComplete="current-password"
+										onChange={(e) => setConfirmPassword(e.target.value)}
+										className="w-full h-11 rounded-xl bg-white/90 text-secondary placeholder-secondary/50 px-4 outline-none ring-2 ring-transparent focus:ring-accent/60 transition"
+									/>
+								</div>
 
 								<button
 									onClick={register}
@@ -159,12 +159,12 @@ export default function RegisterPage() {
 							</div>
 
 							<div className="mt-6 text-center text-sm text-primary/90">
-								Already have an account?{" "}
+								Already have and account?{" "}
 								<Link
 									to="/login"
 									className="text-accent hover:underline underline-offset-4"
 								>
-									Log in to your account
+									Login your account
 								</Link>
 							</div>
 						</div>
@@ -175,8 +175,7 @@ export default function RegisterPage() {
 						</p>
 					</div>
 				</div>
-
-				{/* Right side hero */}
+				{/* Left side hero */}
 				<div className="hidden lg:flex flex-col justify-between p-10">
 					<div className="flex items-center gap-4">
 						<img
@@ -208,6 +207,8 @@ export default function RegisterPage() {
 					</p>
 				</div>
 
+				{/* Right side form */}
+				
 			</div>
 		</div>
 	);

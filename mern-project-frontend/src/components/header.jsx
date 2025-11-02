@@ -2,11 +2,10 @@ import { useState } from "react";
 import { BsCart3 } from "react-icons/bs";
 import { MdMenu } from "react-icons/md";
 import { Link } from "react-router-dom";
-import UserData from "./userData.jsx";
-import UserDataMobile from "./userDataMobile.jsx";
+import UserData from "./userData";
+import UserDataMobile from "./userDataMobile";
 
 export default function Header() {
-
 	const [isSideBarOpen, setIsSidebarOpen] = useState(false);
 
 	return (
@@ -35,7 +34,6 @@ export default function Header() {
 									src="/logo.png"
 									className="  h-full  w-[180px]   object-cover"
 								/>
-
 							</div>
 							<a href="/" className="p-4 border-b border-secondary/10">
 								Home
@@ -52,21 +50,21 @@ export default function Header() {
 							<a href="/cart" className="p-4 border-b border-secondary/10">
 								Cart
 							</a>
-							<div className="flex lg:hidden w-[300px] absolute bottom-[20px] left-0 justify-center items-center gap-4">
-								<UserDataMobile/>
+							<div className=" lg:hidden flex w-[300px] absolute bottom-[20px] left-0  justify-center items-center gap-4">
+								<UserDataMobile />
 							</div>
 						</div>
 					</div>
 				)}
 
-				<div className="hidden h-full lg:flex justify-center items-center w-full text-lg gap-[20px]">
+				<div className="hidden  h-full lg:flex justify-center items-center w-full text-lg gap-[20px]">
 					<Link to="/">Home</Link>
 					<Link to="/products">Products</Link>
 					<Link to="/about">About</Link>
 					<Link to="/contact">Contact</Link>
 				</div>
-				<div className="h-full hidden lg:flex w-[200px] absolute right-[100px] top-0 justify-end items-center gap-4">
-					<UserData/>
+				<div className="h-full hidden lg:flex w-[200px] absolute right-[100px] top-0  justify-end items-center gap-4">
+					<UserData />
 				</div>
 				<Link
 					to="/cart"

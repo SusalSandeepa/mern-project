@@ -88,7 +88,8 @@ export default function UserData() {
             {/* Avatar */}
             {user.image ? (
               <img
-                src={user.image}
+                src={user.image}  
+                referrerPolicy="no-referrer" 
                 alt={`${user.firstName ?? "User"} avatar`}
                 className="h-9 w-9 rounded-full ring-2 ring-accent/50 object-cover"
               />
