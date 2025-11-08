@@ -343,7 +343,6 @@ export async function sendOTP(req, res) {
 		});
 	} catch (err) {
 		console.error(err);
-		console.log(err);
 		res.status(500).json({
 			message: "Failed to send OTP",
 		});
