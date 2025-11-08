@@ -18,10 +18,6 @@ const transporter = nodemailer.createTransport({
 		user: process.env.EMAIL_USER,
 		pass: process.env.APP_PASSWORD,
 	},
-	tls: {
-    rejectUnauthorized: false, // add this line
-  	},
-
 });
 
 export function createUser(req, res) {
@@ -322,6 +318,8 @@ export async function sendOTP(req, res) {
 		});
 		await newOTP.save();
 
+		
+
 		await transporter.sendMail({
 			from: process.env.EMAIL_USER,
 			to: email,
@@ -386,6 +384,58 @@ export async function changePasswordViaOTP(req, res) {
 	} catch (err) {
 		res.status(500).json({
 			message: "Failed to change password",
+		});
+	}
+}
+
+export async function updateUserData(req, res) {
+	if (req.user == null) {
+		res.status(401).json({
+			message: "Unauthorized",
+		});
+		return;
+	}
+
+	try{
+
+		await User.updateOne({
+			email: req.user.email
+		},{
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			image: req.body.image
+		})
+		res.json({
+			message: "User data updated successfully",
+		});
+	}catch(err){
+		res.status(500).json({
+			message: "Failed to update user data",
+		});
+	}
+}
+
+export async function updatePassword(req, res) {
+	if (req.user == null) {
+		res.status(401).json({
+			message: "Unauthorized",
+		});
+		return;
+	}
+	try{
+		const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+		await User.updateOne({
+			email: req.user.email
+		},{
+			password: hashedPassword
+		})
+		res.json({
+			message: "Password updated successfully",
+		});
+	}
+	catch(err){
+		res.status(500).json({
+			message: "Failed to update password",
 		});
 	}
 }
