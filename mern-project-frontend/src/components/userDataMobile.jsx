@@ -71,7 +71,7 @@ export default function UserDataMobile(){
                     }
                 } className="ml-2 bg-accent max-w-[20px] text-white p-1 rounded">
                     <option></option>
-                    <option>Accout Settings</option>
+                    <option>Account Settings</option>
                     <option value="logout">Logout</option>
                     <option>Orders</option>
                 </select>
